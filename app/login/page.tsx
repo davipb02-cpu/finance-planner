@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { mockLogin } from "@/lib/auth";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -11,12 +13,12 @@ export default function LoginPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Mock authentication - just redirect to dashboard
+    mockLogin();
     router.push("/dashboard");
   };
 
   const handleGoogleLogin = () => {
-    // Mock Google login - redirect to dashboard
+    mockLogin();
     router.push("/dashboard");
   };
 
@@ -160,13 +162,13 @@ export default function LoginPage() {
           {/* Footer */}
           <div className="mt-8 text-center">
             <p className="text-text-muted text-sm">
-              Don&apos;t have an account?{" "}
-              <a
+              Não tem uma conta?{" "}
+              <Link
+                href="/signup"
                 className="text-text-main font-bold hover:underline"
-                href="#"
               >
-                Start planning
-              </a>
+                Criar conta
+              </Link>
             </p>
           </div>
         </div>

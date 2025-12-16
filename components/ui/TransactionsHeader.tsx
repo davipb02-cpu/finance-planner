@@ -1,10 +1,20 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { mockLogout } from "@/lib/auth";
 
 export default function TransactionsHeader() {
   const pathname = usePathname();
+  const router = useRouter();
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+
+  const handleLogout = () => {
+    setIsLoggingOut(true);
+    mockLogout();
+    router.push("/login");
+  };
 
   return (
     <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-border-color bg-surface-light px-10 py-4 sticky top-0 z-50">
@@ -20,7 +30,9 @@ export default function TransactionsHeader() {
         <div className="flex items-center gap-9 hidden md:flex">
           <Link
             href="/dashboard"
-            className="text-text-main text-sm font-medium leading-normal hover:text-primary transition-colors"
+            className={`text-text-main text-sm font-medium leading-normal hover:text-primary transition-colors ${
+              pathname === "/dashboard" ? "font-bold" : ""
+            }`}
           >
             Dashboard
           </Link>
@@ -43,9 +55,24 @@ export default function TransactionsHeader() {
         >
           <span className="truncate">Import CSV</span>
         </Link>
+        <button
+          onClick={handleLogout}
+          disabled={isLoggingOut}
+          className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border-color text-sm font-bold text-text-main hover:bg-gray-100 transition-colors disabled:opacity-60"
+        >
+          <span className="text-[18px]">↩</span>
+          <span>{isLoggingOut ? "Logging out..." : "Logout"}</span>
+        </button>
+        <button
+          onClick={handleLogout}
+          disabled={isLoggingOut}
+          className="md:hidden size-10 rounded-full bg-gray-200 border-2 border-white shadow-sm cursor-pointer hover:opacity-90 transition-opacity flex items-center justify-center text-base font-bold disabled:opacity-60"
+          aria-label="Logout"
+        >
+          ↩
+        </button>
         <div className="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-white shadow-sm bg-gray-200" />
       </div>
     </header>
   );
 }
-

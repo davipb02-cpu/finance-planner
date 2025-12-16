@@ -1,10 +1,14 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { mockLogout } from "@/lib/auth";
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const router = useRouter();
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   const isActive = (path: string) => pathname === path;
 
@@ -13,6 +17,12 @@ export default function Sidebar() {
     { href: "/transactions", label: "Transactions", icon: "💳" },
     { href: "/upload", label: "Import CSV", icon: "📤" },
   ];
+
+  const handleLogout = () => {
+    setIsLoggingOut(true);
+    mockLogout();
+    router.push("/login");
+  };
 
   return (
     <aside className="hidden lg:flex flex-col w-72 h-full bg-surface-light border-r border-border-color p-6 justify-between flex-shrink-0">
@@ -63,6 +73,14 @@ export default function Sidebar() {
             ></div>
           </div>
         </div>
+        <button
+          onClick={handleLogout}
+          disabled={isLoggingOut}
+          className="flex items-center justify-center gap-2 px-4 py-3 rounded-full border border-border-color text-sm font-bold text-text-main hover:bg-gray-100 transition-colors disabled:opacity-60"
+        >
+          <span className="text-lg">↩</span>
+          <span>{isLoggingOut ? "Logging out..." : "Logout"}</span>
+        </button>
       </div>
     </aside>
   );

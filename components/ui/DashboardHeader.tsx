@@ -1,10 +1,20 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { mockLogout } from "@/lib/auth";
 
 export default function DashboardHeader() {
   const pathname = usePathname();
+  const router = useRouter();
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+
+  const handleLogout = () => {
+    setIsLoggingOut(true);
+    mockLogout();
+    router.push("/login");
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full bg-surface-light/90 backdrop-blur-md border-b border-gray-100">
@@ -62,13 +72,27 @@ export default function DashboardHeader() {
           </div>
           {/* Mobile Month Only */}
           <button className="md:hidden flex items-center gap-1 bg-primary text-black px-3 py-1.5 rounded-full text-sm font-bold">
-            <span>Jan &apos;25</span>
+            <span>Jan '25</span>
             <span className="text-[16px]">▼</span>
           </button>
-          <div className="size-10 rounded-full bg-gray-200 border-2 border-white shadow-sm cursor-pointer hover:opacity-90 transition-opacity" />
+          <button
+            onClick={handleLogout}
+            disabled={isLoggingOut}
+            className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border-color text-sm font-bold text-text-main hover:bg-gray-100 transition-colors disabled:opacity-60"
+          >
+            <span className="text-[18px]">↩</span>
+            <span>{isLoggingOut ? "Logging out..." : "Logout"}</span>
+          </button>
+          <button
+            onClick={handleLogout}
+            disabled={isLoggingOut}
+            className="md:hidden size-10 rounded-full bg-gray-200 border-2 border-white shadow-sm cursor-pointer hover:opacity-90 transition-opacity flex items-center justify-center text-base font-bold disabled:opacity-60"
+            aria-label="Logout"
+          >
+            ↩
+          </button>
         </div>
       </div>
     </header>
   );
 }
-
