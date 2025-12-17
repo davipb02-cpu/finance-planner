@@ -133,10 +133,10 @@ export default function TransactionsPage() {
           <div className="flex flex-wrap justify-between items-end gap-4">
             <div className="flex flex-col gap-2">
               <h1 className="text-text-main text-4xl md:text-5xl font-black leading-tight tracking-[-0.033em]">
-                Your Activity
+                Sua Atividade
               </h1>
               <p className="text-text-muted text-lg font-normal">
-                A narrative view of your spending in {selectedMonth}
+                Uma visão narrativa dos seus gastos em {selectedMonth}
               </p>
             </div>
             {/* Mobile only action */}
@@ -144,7 +144,7 @@ export default function TransactionsPage() {
               href="/upload"
               className="md:hidden flex cursor-pointer items-center justify-center rounded-full h-10 px-4 bg-primary text-text-main text-sm font-bold"
             >
-              Import CSV
+              Importar CSV
             </Link>
           </div>
 
@@ -156,11 +156,11 @@ export default function TransactionsPage() {
                   <span className="text-sm">📈</span>
                 </div>
                 <p className="text-text-muted text-sm font-medium uppercase tracking-wider">
-                  Total Income
+                  Total de Receitas
                 </p>
               </div>
               <p className="text-text-main text-3xl font-bold tracking-tight">
-                ${totalIncome.toLocaleString()}
+                R${totalIncome.toLocaleString()}
               </p>
             </div>
 
@@ -170,11 +170,11 @@ export default function TransactionsPage() {
                   <span className="text-sm">📉</span>
                 </div>
                 <p className="text-text-muted text-sm font-medium uppercase tracking-wider">
-                  Total Expenses
+                  Total de Despesas
                 </p>
               </div>
               <p className="text-text-main text-3xl font-bold tracking-tight">
-                ${totalExpenses.toLocaleString()}
+                R${totalExpenses.toLocaleString()}
               </p>
             </div>
 
@@ -184,11 +184,11 @@ export default function TransactionsPage() {
                   <span className="text-sm">🏛️</span>
                 </div>
                 <p className="text-text-muted text-sm font-medium uppercase tracking-wider">
-                  Net Balance
+                  Saldo Líquido
                 </p>
               </div>
               <p className="text-text-main text-3xl font-bold tracking-tight">
-                ${netBalance.toLocaleString()}
+                R${netBalance.toLocaleString()}
               </p>
             </div>
           </div>
@@ -204,18 +204,18 @@ export default function TransactionsPage() {
             </button>
             <button className="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white border border-border-color px-5 hover:border-gray-400 transition-colors">
               <p className="text-text-main text-sm font-medium">
-                {selectedCategory}
+                {selectedCategory === "All Categories" ? "Todas as Categorias" : selectedCategory}
               </p>
               <span className="text-lg text-text-muted">▼</span>
             </button>
             <button className="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white border border-border-color px-5 hover:border-gray-400 transition-colors">
-              <p className="text-text-main text-sm font-medium">{selectedType}</p>
+              <p className="text-text-main text-sm font-medium">{selectedType === "All Types" ? "Todos os Tipos" : selectedType}</p>
               <span className="text-lg text-text-muted">▼</span>
             </button>
             <div className="w-px h-8 bg-gray-300 my-auto mx-1"></div>
             <button className="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-full bg-transparent hover:bg-gray-200 px-3 transition-colors text-text-muted">
               <span className="text-xl">☰</span>
-              <span className="text-sm font-medium">More Filters</span>
+              <span className="text-sm font-medium">Mais Filtros</span>
             </button>
             <button className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-transparent hover:bg-gray-200 transition-colors text-text-muted ml-auto">
               <span className="text-xl">🔍</span>
@@ -238,7 +238,7 @@ export default function TransactionsPage() {
                   }`}
                 >
                   {day.total >= 0 ? "+" : ""}
-                  ${Math.abs(day.total).toFixed(2)}
+                  R${Math.abs(day.total).toFixed(2)}
                 </span>
               </div>
 
@@ -302,7 +302,7 @@ export default function TransactionsPage() {
                       }`}
                     >
                       {transaction.amount >= 0 ? "+" : ""}
-                      ${Math.abs(transaction.amount).toFixed(2)}
+                      R${Math.abs(transaction.amount).toFixed(2)}
                     </p>
                   </div>
                 ))}
@@ -314,7 +314,7 @@ export default function TransactionsPage() {
         {/* Pagination/Footer */}
         <div className="flex justify-center pb-12">
           <button className="flex items-center gap-2 px-6 py-3 rounded-full bg-white border border-border-color text-text-main font-medium hover:bg-gray-50 transition-colors shadow-sm">
-            <span>Load More Transactions</span>
+            <span>Carregar Mais Transações</span>
             <span className="text-lg">⬇</span>
           </button>
         </div>

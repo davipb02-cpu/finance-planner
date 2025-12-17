@@ -14,8 +14,8 @@ export default function Sidebar() {
 
   const navLinks = [
     { href: "/dashboard", label: "Dashboard", icon: "📊" },
-    { href: "/transactions", label: "Transactions", icon: "💳" },
-    { href: "/upload", label: "Import CSV", icon: "📤" },
+    { href: "/transactions", label: "Transações", icon: "💳" },
+    { href: "/upload", label: "Importar CSV", icon: "📤" },
   ];
 
   const handleLogout = () => {
@@ -34,7 +34,7 @@ export default function Sidebar() {
             <h1 className="text-text-main text-lg font-bold leading-tight font-display">
               FinancePlanner
             </h1>
-            <p className="text-text-muted text-sm font-normal">Personal Edition</p>
+            <p className="text-text-muted text-sm font-normal">Edição Pessoal</p>
           </div>
         </Link>
 
@@ -62,7 +62,7 @@ export default function Sidebar() {
         <div className="bg-gray-50 rounded-xl p-4 flex flex-col gap-2">
           <div className="flex justify-between items-center">
             <span className="text-xs font-bold uppercase tracking-wider text-text-muted">
-              Storage
+              Armazenamento
             </span>
             <span className="text-xs font-bold text-text-main">75%</span>
           </div>
@@ -79,7 +79,7 @@ export default function Sidebar() {
           className="flex items-center justify-center gap-2 px-4 py-3 rounded-full border border-border-color text-sm font-bold text-text-main hover:bg-gray-100 transition-colors disabled:opacity-60"
         >
           <span className="text-lg">↩</span>
-          <span>{isLoggingOut ? "Logging out..." : "Logout"}</span>
+          <span>{isLoggingOut ? "Saindo..." : "Logout"}</span>
         </button>
       </div>
     </aside>

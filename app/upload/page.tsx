@@ -79,11 +79,11 @@ export default function UploadPage() {
           {/* Page Heading */}
           <header className="flex flex-col gap-2">
             <h1 className="text-text-main text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em]">
-              Import transactions
+              Importar transações
             </h1>
             <p className="text-text-muted text-base font-normal max-w-2xl">
-              Upload your bank statement CSV to automatically categorize and
-              analyze your monthly expenses.
+              Envie seu extrato bancário em CSV para categorizar e
+              analisar automaticamente suas despesas mensais.
             </p>
           </header>
 
@@ -104,14 +104,14 @@ export default function UploadPage() {
                   <span className="text-4xl text-text-muted">☁️</span>
                 </div>
                 <p className="text-text-main text-xl font-bold leading-tight tracking-[-0.015em]">
-                  Drag & drop your CSV here
+                  Arraste e solte seu CSV aqui
                 </p>
                 <p className="text-text-muted text-sm font-normal">
-                  Supports .csv files up to 10MB
+                  Suporta arquivos .csv de até 10MB
                 </p>
               </div>
               <label className="flex items-center justify-center rounded-full h-10 px-6 bg-primary text-text-main text-sm font-bold shadow-sm hover:brightness-95 transition-all cursor-pointer">
-                Browse Files
+                Procurar Arquivos
                 <input
                   type="file"
                   accept=".csv"
@@ -127,7 +127,7 @@ export default function UploadPage() {
             <section className="flex flex-col gap-4">
               <div className="flex items-center justify-between px-2">
                 <h2 className="text-text-main text-xl font-bold leading-tight tracking-[-0.015em]">
-                  File Preview
+                  Pré-visualização do Arquivo
                 </h2>
                 <div className="flex items-center gap-2">
                   <span className="text-text-muted text-sm">✓</span>
@@ -143,16 +143,16 @@ export default function UploadPage() {
                   <thead>
                     <tr className="bg-gray-50/50 border-b border-border-color">
                       <th className="p-4 text-text-main text-sm font-bold w-[20%]">
-                        Date
+                        Data
                       </th>
                       <th className="p-4 text-text-main text-sm font-bold w-[40%]">
-                        Description
+                        Descrição
                       </th>
                       <th className="p-4 text-text-main text-sm font-bold w-[20%]">
-                        Amount
+                        Valor
                       </th>
                       <th className="p-4 text-text-main text-sm font-bold w-[20%]">
-                        Category
+                        Categoria
                       </th>
                     </tr>
                   </thead>
@@ -176,7 +176,7 @@ export default function UploadPage() {
                           }`}
                         >
                           {row.amount >= 0 ? "+" : ""}
-                          ${Math.abs(row.amount).toFixed(2)}
+                          R${Math.abs(row.amount).toFixed(2)}
                         </td>
                         <td className="p-4">
                           <div className="inline-flex items-center px-3 py-1 rounded-full bg-gray-50 text-text-main text-xs font-bold border border-transparent">
@@ -191,7 +191,7 @@ export default function UploadPage() {
 
               {/* Pagination / Info */}
               <div className="flex justify-between items-center px-2">
-                <p className="text-xs text-text-muted">Showing 3 of 48 rows</p>
+                <p className="text-xs text-text-muted">Mostrando 3 de 48 linhas</p>
               </div>
             </section>
           )}
@@ -204,13 +204,13 @@ export default function UploadPage() {
               href="/dashboard"
               className="h-12 px-6 rounded-full text-text-main font-bold hover:bg-gray-50 transition-colors"
             >
-              Cancel
+              Cancelar
             </Link>
             <button
               disabled={!selectedFile}
               className="h-12 px-8 rounded-full bg-primary text-text-main font-bold shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <span>Import transactions</span>
+              <span>Importar transações</span>
               <span className="text-sm">→</span>
             </button>
           </div>

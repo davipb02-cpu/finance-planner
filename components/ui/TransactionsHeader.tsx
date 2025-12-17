@@ -46,14 +46,14 @@ export default function TransactionsHeader() {
             href="/upload"
             className="text-text-main text-sm font-medium leading-normal hover:text-primary transition-colors"
           >
-            Import CSV
+            Importar CSV
           </Link>
         </div>
         <Link
           href="/upload"
           className="hidden md:flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 bg-primary hover:bg-yellow-300 transition-colors text-text-main text-sm font-bold leading-normal tracking-[0.015em]"
         >
-          <span className="truncate">Import CSV</span>
+          <span className="truncate">Importar CSV</span>
         </Link>
         <button
           onClick={handleLogout}
@@ -61,7 +61,7 @@ export default function TransactionsHeader() {
           className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border-color text-sm font-bold text-text-main hover:bg-gray-100 transition-colors disabled:opacity-60"
         >
           <span className="text-[18px]">↩</span>
-          <span>{isLoggingOut ? "Logging out..." : "Logout"}</span>
+          <span>{isLoggingOut ? "Saindo..." : "Logout"}</span>
         </button>
         <button
           onClick={handleLogout}

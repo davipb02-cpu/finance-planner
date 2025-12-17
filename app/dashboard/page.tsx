@@ -24,10 +24,10 @@ export default function DashboardPage() {
         <section className="flex flex-col gap-6">
           <div className="space-y-1">
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
-              Your January Story
+              Sua História de Janeiro
             </h2>
             <p className="text-gray-500 text-lg">
-              Here&apos;s how your month is shaping up so far.
+              Veja como seu mês está se desenvolvendo até agora.
             </p>
           </div>
 
@@ -37,10 +37,10 @@ export default function DashboardPage() {
             <div className="bg-surface-light p-6 rounded-2xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-transparent flex flex-col justify-between h-32 group hover:-translate-y-1 transition-transform duration-300">
               <div className="flex items-center gap-2 text-gray-500 mb-2">
                 <span className="text-[20px] text-green-600">⬇</span>
-                <span className="text-sm font-medium">Income</span>
+                <span className="text-sm font-medium">Receitas</span>
               </div>
               <p className="text-3xl font-bold tracking-tight">
-                ${mockMonthSummary.income.toLocaleString()}
+                R${mockMonthSummary.income.toLocaleString()}
               </p>
             </div>
 
@@ -48,10 +48,10 @@ export default function DashboardPage() {
             <div className="bg-surface-light p-6 rounded-2xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-transparent flex flex-col justify-between h-32 group hover:-translate-y-1 transition-transform duration-300">
               <div className="flex items-center gap-2 text-gray-500 mb-2">
                 <span className="text-[20px] text-red-500">⬆</span>
-                <span className="text-sm font-medium">Expenses</span>
+                <span className="text-sm font-medium">Despesas</span>
               </div>
               <p className="text-3xl font-bold tracking-tight">
-                ${mockMonthSummary.expenses.toLocaleString()}
+                R${mockMonthSummary.expenses.toLocaleString()}
               </p>
             </div>
 
@@ -60,10 +60,10 @@ export default function DashboardPage() {
               <div className="absolute -right-4 -top-4 bg-white/20 size-24 rounded-full blur-xl"></div>
               <div className="flex items-center gap-2 text-black/70 mb-2 relative z-10">
                 <span className="text-[20px]">🏛️</span>
-                <span className="text-sm font-bold">Leftover</span>
+                <span className="text-sm font-bold">Saldo</span>
               </div>
               <p className="text-3xl font-bold tracking-tight text-black relative z-10">
-                ${mockMonthSummary.leftover.toLocaleString()}
+                R${mockMonthSummary.leftover.toLocaleString()}
               </p>
             </div>
           </div>
@@ -74,7 +74,7 @@ export default function DashboardPage() {
           <div className="flex items-center justify-between">
             <h3 className="text-xl font-bold flex items-center gap-2">
               <span className="text-primary">✨</span>
-              Insights Feed
+              Feed de Insights
             </h3>
           </div>
 
@@ -82,18 +82,18 @@ export default function DashboardPage() {
           <div className="bg-surface-light rounded-xl p-6 md:p-8 shadow-sm border border-gray-100 flex flex-col md:flex-row gap-8 items-center">
             <div className="flex-1 w-full space-y-4">
               <h4 className="text-lg font-bold">
-                Where your money went
+                Para onde foi seu dinheiro
               </h4>
               <p className="text-gray-500 text-sm leading-relaxed">
-                Housing remains your biggest commitment, but{" "}
-                <strong className="text-black">Entertainment</strong> spending
-                is up 15% compared to last month.
+                Moradia continua sendo seu maior compromisso, mas os gastos com{" "}
+                <strong className="text-black">Entretenimento</strong> aumentaram
+                15% em relação ao mês passado.
               </p>
               <Link
                 href="/transactions"
                 className="text-sm font-bold border-b-2 border-primary pb-0.5 hover:text-gray-600 transition-colors inline-block"
               >
-                View full report
+                Ver relatório completo
               </Link>
             </div>
 
@@ -115,7 +115,7 @@ export default function DashboardPage() {
                   Total
                 </span>
                 <span className="text-lg font-bold">
-                  ${totalExpenses.toLocaleString()}
+                  R${totalExpenses.toLocaleString()}
                 </span>
               </div>
             </div>
@@ -147,7 +147,7 @@ export default function DashboardPage() {
                 <div>
                   <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-100 text-red-700 text-xs font-bold uppercase tracking-wider mb-2">
                     <span className="text-[14px]">⚠️</span>
-                    Biggest Expense
+                    Maior Despesa
                   </div>
                   <h4 className="text-xl font-bold">{mockBiggestExpense.name}</h4>
                   <p className="text-gray-500 text-sm">
@@ -155,7 +155,7 @@ export default function DashboardPage() {
                   </p>
                 </div>
                 <div className="text-3xl font-bold tabular-nums">
-                  ${Math.abs(mockBiggestExpense.amount).toLocaleString()}
+                  R${Math.abs(mockBiggestExpense.amount).toLocaleString()}
                 </div>
               </div>
             </div>
@@ -169,15 +169,15 @@ export default function DashboardPage() {
                 <div>
                   <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/20 text-black text-xs font-bold uppercase tracking-wider mb-2">
                     <span className="text-[14px]">📈</span>
-                    Top Spending
+                    Maior Gasto
                   </div>
                   <h4 className="text-xl font-bold">{mockTopSpending.name}</h4>
                   <p className="text-gray-500 text-sm">
-                    {mockTopSpending.transactionCount} Transactions
+                    {mockTopSpending.transactionCount} Transações
                   </p>
                 </div>
                 <div className="text-3xl font-bold tabular-nums">
-                  ${Math.abs(mockTopSpending.amount).toLocaleString()}
+                  R${Math.abs(mockTopSpending.amount).toLocaleString()}
                 </div>
               </div>
             </div>
@@ -187,12 +187,12 @@ export default function DashboardPage() {
         {/* Transaction Feed */}
         <section className="flex flex-col gap-6 pb-20">
           <div className="flex items-center justify-between px-2">
-            <h3 className="text-xl font-bold">Recent Activity</h3>
+            <h3 className="text-xl font-bold">Atividade Recente</h3>
             <Link
               href="/transactions"
               className="text-sm font-bold text-gray-500 hover:text-black transition-colors"
             >
-              View All
+              Ver Todas
             </Link>
           </div>
 
@@ -236,7 +236,7 @@ export default function DashboardPage() {
                   }`}
                 >
                   {transaction.amount >= 0 ? "+" : ""}
-                  ${Math.abs(transaction.amount).toFixed(2)}
+                  R${Math.abs(transaction.amount).toFixed(2)}
                 </div>
               </div>
             ))}
@@ -248,7 +248,7 @@ export default function DashboardPage() {
       <div className="fixed bottom-8 right-8 z-50">
         <Link
           href="/upload"
-          aria-label="Add transaction"
+          aria-label="Adicionar transação"
           className="size-16 rounded-full bg-primary text-black shadow-xl hover:shadow-2xl hover:scale-110 transition-all flex items-center justify-center group"
         >
           <span className="text-[32px] group-hover:rotate-90 transition-transform duration-300">

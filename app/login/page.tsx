@@ -43,10 +43,10 @@ export default function LoginPage() {
           {/* Heading */}
           <div className="mb-8">
             <h1 className="text-text-main text-3xl md:text-4xl font-bold leading-tight tracking-tight mb-3">
-              Welcome back
+              Bem-vindo de volta
             </h1>
             <p className="text-text-muted text-base font-normal leading-normal">
-              Import your data and plan your narrative.
+              Importe seus dados e planeje sua narrativa financeira.
             </p>
           </div>
 
@@ -79,7 +79,7 @@ export default function LoginPage() {
               />
             </svg>
             <span className="text-text-main text-sm font-medium">
-              Continue with Google
+              Continuar com Google
             </span>
           </button>
 
@@ -87,7 +87,7 @@ export default function LoginPage() {
           <div className="flex items-center gap-4 mb-6">
             <div className="flex-1 h-px bg-border-color"></div>
             <p className="text-text-muted text-xs font-medium uppercase tracking-wide">
-              Or sign in with email
+              Ou faça login com email
             </p>
             <div className="flex-1 h-px bg-border-color"></div>
           </div>
@@ -100,12 +100,12 @@ export default function LoginPage() {
                 className="text-text-main text-sm font-medium ml-2"
                 htmlFor="email"
               >
-                Email Address
+                Endereço de Email
               </label>
               <input
                 className="form-input w-full h-12 px-5 bg-white border border-border-color rounded-full text-text-main placeholder-text-muted focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all"
                 id="email"
-                placeholder="name@example.com"
+                placeholder="nome@exemplo.com"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -118,13 +118,13 @@ export default function LoginPage() {
                 className="text-text-main text-sm font-medium ml-2"
                 htmlFor="password"
               >
-                Password
+                Senha
               </label>
               <div className="relative w-full">
                 <input
                   className="form-input w-full h-12 pl-5 pr-12 bg-white border border-border-color rounded-full text-text-main placeholder-text-muted focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all"
                   id="password"
-                  placeholder="Enter your password"
+                  placeholder="Digite sua senha"
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -145,7 +145,7 @@ export default function LoginPage() {
                 className="text-sm font-medium text-text-main hover:text-text-muted hover:text-primary transition-colors"
                 href="#"
               >
-                Forgot Password?
+                Esqueceu a senha?
               </a>
             </div>
 
@@ -154,7 +154,7 @@ export default function LoginPage() {
               className="w-full h-12 mt-2 bg-primary text-black text-base font-bold rounded-full hover:brightness-95 active:scale-[0.98] transition-all flex items-center justify-center gap-2"
               type="submit"
             >
-              Sign In
+              Entrar
               <span style={{ fontSize: "20px" }}>→</span>
             </button>
           </form>
@@ -193,8 +193,8 @@ export default function LoginPage() {
                 <span className="text-black">📈</span>
               </div>
               <div>
-                <p className="text-sm font-bold text-text-main">Monthly Overview</p>
-                <p className="text-xs text-text-muted">Net worth up by 12%</p>
+                <p className="text-sm font-bold text-text-main">Visão Mensal</p>
+                <p className="text-xs text-text-muted">Patrimônio aumentou 12%</p>
               </div>
             </div>
             <div className="flex gap-2 items-end h-24 w-full px-2 pb-2 border-b border-black/5">
