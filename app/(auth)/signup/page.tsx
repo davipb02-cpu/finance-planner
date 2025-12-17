@@ -2,19 +2,21 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { supabase } from "@/lib/supabase/client";
 
 export default function SignupPage() {
-  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
   const [errors, setErrors] = useState<{
     email?: string;
     password?: string;
     confirmPassword?: string;
+    general?: string;
   }>({});
 
   const validateForm = () => {
@@ -42,12 +44,56 @@ export default function SignupPage() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (validateForm()) {
-      console.log("Signup form submitted:", { email, password });
-      // TODO: Add signup logic here
-      router.push("/login");
+
+    // Clear previous messages
+    setSuccessMessage("");
+    setErrors((prev) => ({ ...prev, general: undefined }));
+
+    // Validate form
+    if (!validateForm()) {
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+      });
+
+      if (error) {
+        // Handle Supabase errors with Portuguese messages
+        let errorMessage = "Ocorreu um erro ao criar a conta. Tente novamente.";
+
+        if (error.message.includes("already registered")) {
+          errorMessage = "Este email já está cadastrado.";
+        } else if (error.message.includes("invalid email")) {
+          errorMessage = "Email inválido.";
+        } else if (error.message.includes("Password should be")) {
+          errorMessage = "A senha deve ter pelo menos 6 caracteres.";
+        }
+
+        setErrors((prev) => ({ ...prev, general: errorMessage }));
+        return;
+      }
+
+      // Success
+      setSuccessMessage("Conta criada com sucesso. Verifique seu e-mail se necessário.");
+
+      // Clear form
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
+    } catch (err) {
+      setErrors((prev) => ({
+        ...prev,
+        general: "Erro inesperado. Tente novamente mais tarde."
+      }));
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -78,6 +124,20 @@ export default function SignupPage() {
               Importe seus dados e planeje sua narrativa financeira.
             </p>
           </div>
+
+          {/* Success Message */}
+          {successMessage && (
+            <div className="mb-4 p-4 bg-green-50 border border-green-200 rounded-2xl">
+              <p className="text-green-700 text-sm font-medium">{successMessage}</p>
+            </div>
+          )}
+
+          {/* General Error Message */}
+          {errors.general && (
+            <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-2xl">
+              <p className="text-red-700 text-sm font-medium">{errors.general}</p>
+            </div>
+          )}
 
           {/* Signup Form */}
           <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
@@ -198,11 +258,21 @@ export default function SignupPage() {
 
             {/* Submit Button */}
             <button
-              className="w-full h-12 mt-2 bg-primary text-black text-base font-bold rounded-full hover:brightness-95 active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+              className="w-full h-12 mt-2 bg-primary text-black text-base font-bold rounded-full hover:brightness-95 active:scale-[0.98] transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:brightness-100"
               type="submit"
+              disabled={isLoading}
             >
-              Criar conta
-              <span style={{ fontSize: "20px" }}>→</span>
+              {isLoading ? (
+                <>
+                  <span className="inline-block animate-spin">⏳</span>
+                  <span>Criando conta...</span>
+                </>
+              ) : (
+                <>
+                  <span>Criar conta</span>
+                  <span style={{ fontSize: "20px" }}>→</span>
+                </>
+              )}
             </button>
           </form>
 
