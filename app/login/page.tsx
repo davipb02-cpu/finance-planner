@@ -3,23 +3,50 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { mockLogin } from "@/lib/auth";
+import { supabase } from "@/lib/supabase/client";
 
 export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    mockLogin();
-    router.push("/dashboard");
+    setLoading(true);
+    setError("");
+    setSuccess(false);
+
+    try {
+      const { data, error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (signInError) {
+        if (signInError.message.includes("Invalid login credentials")) {
+          setError("Email ou senha inválidos.");
+        } else {
+          setError("Erro ao realizar login. Tente novamente.");
+        }
+        return;
+      }
+
+      if (data.user) {
+        setSuccess(true);
+      }
+    } catch (err) {
+      setError("Erro ao realizar login. Tente novamente.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleGoogleLogin = () => {
-    mockLogin();
-    router.push("/dashboard");
+    // TODO: Implement Google OAuth later
   };
 
   return (
@@ -94,6 +121,22 @@ export default function LoginPage() {
 
           {/* Login Form */}
           <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
+            {/* Error Message */}
+            {error && (
+              <div className="p-4 bg-red-50 border border-red-200 rounded-2xl">
+                <p className="text-red-600 text-sm font-medium">{error}</p>
+              </div>
+            )}
+
+            {/* Success Message */}
+            {success && (
+              <div className="p-4 bg-green-50 border border-green-200 rounded-2xl">
+                <p className="text-green-600 text-sm font-medium">
+                  Login realizado com sucesso.
+                </p>
+              </div>
+            )}
+
             {/* Email Input */}
             <div className="flex flex-col gap-2">
               <label
@@ -151,11 +194,12 @@ export default function LoginPage() {
 
             {/* Submit Button */}
             <button
-              className="w-full h-12 mt-2 bg-primary text-black text-base font-bold rounded-full hover:brightness-95 active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+              className="w-full h-12 mt-2 bg-primary text-black text-base font-bold rounded-full hover:brightness-95 active:scale-[0.98] transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:brightness-100 disabled:active:scale-100"
               type="submit"
+              disabled={loading}
             >
-              Entrar
-              <span style={{ fontSize: "20px" }}>→</span>
+              {loading ? "Entrando..." : "Entrar"}
+              {!loading && <span style={{ fontSize: "20px" }}>→</span>}
             </button>
           </form>
 
