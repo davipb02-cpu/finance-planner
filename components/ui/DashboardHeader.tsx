@@ -3,22 +3,46 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { mockLogout } from "@/lib/auth";
+import { supabase } from "@/lib/supabase/client";
 
 export default function DashboardHeader() {
   const pathname = usePathname();
   const router = useRouter();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     setIsLoggingOut(true);
-    mockLogout();
-    router.push("/login");
+    setError("");
+
+    try {
+      const { error: signOutError } = await supabase.auth.signOut();
+
+      if (signOutError) {
+        setError("Erro ao realizar logout.");
+        setIsLoggingOut(false);
+        return;
+      }
+
+      // Success - redirect to login
+      router.push("/login");
+    } catch (err) {
+      setError("Erro ao realizar logout.");
+      setIsLoggingOut(false);
+    }
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-surface-light/90 backdrop-blur-md border-b border-gray-100">
-      <div className="max-w-[960px] mx-auto px-4 md:px-8 h-20 flex items-center justify-between">
+    <>
+      {error && (
+        <div className="bg-red-50 border-b border-red-200 px-4 py-3">
+          <p className="text-red-600 text-sm font-medium text-center max-w-[960px] mx-auto">
+            {error}
+          </p>
+        </div>
+      )}
+      <header className="sticky top-0 z-50 w-full bg-surface-light/90 backdrop-blur-md border-b border-gray-100">
+        <div className="max-w-[960px] mx-auto px-4 md:px-8 h-20 flex items-center justify-between">
         {/* Logo */}
         <Link href="/dashboard" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
           <div className="size-8 text-primary bg-black rounded-lg flex items-center justify-center">
@@ -94,5 +118,6 @@ export default function DashboardHeader() {
         </div>
       </div>
     </header>
+    </>
   );
 }
